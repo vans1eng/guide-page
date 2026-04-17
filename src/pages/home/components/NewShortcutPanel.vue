@@ -4,18 +4,18 @@
     @click="handleClosePanel">
     <div
       :style="{ scale: homeStoreInstance.newShortcutPanelShow ? 1 : 0, opacity: homeStoreInstance.newShortcutPanelShow ? 1 : 0 }"
-      class="newShortcut-panel w-[800px] h-[500px] transition duration-300  bg-white/50 backdrop-blur-[30px] rounded-[10px] p-5 my-10 translate-y-10 flex flex-col"
+      class="newShortcut-panel w-[800px] h-[500px] transition duration-300  bg-white/10 backdrop-blur-[30px] rounded-[10px] p-5 my-10 translate-y-10 flex flex-col"
       @click.stop>
       <div class="newShortcut-panel-header text-[1.2rem] font-bold mb-5 text-white/80">新建快捷方式</div>
       <div class="newShortcut-panel-body flex flex-col flex-1 justify-between">
         <div class="flex flex-col">
           <input ref="shortcutNameInputEl" type="text" placeholder="请输入名称"
-            class="w-full mb-3 p-2 rounded-md border bg-gray-200 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full mb-3 p-2 rounded-md outline-none backdrop-blur-[30px] bg-white/10 text-black transition duration-300 hover:bg-white/50 hover:text-black/90 focus:bg-white focus:text-black border-gray-300">
           <input ref="shortcutUrlInputEl" type="text" placeholder="请输入链接"
-            class="w-full mb-3 p-2 rounded-md border bg-gray-200 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full mb-3 p-2 rounded-md outline-none backdrop-blur-[30px] bg-white/10 text-black transition duration-300 hover:bg-white/50 hover:text-black/90 focus:bg-white focus:text-black border-gray-300">
         </div>
         <button
-          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 cursor-pointer"
+          class="bg-white/10 text-white px-4 py-2 rounded-md hover:bg-white/20 transition duration-300 cursor-pointer"
           @click="newShortcut">保存</button>
       </div>
     </div>

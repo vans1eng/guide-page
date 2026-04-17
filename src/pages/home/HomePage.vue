@@ -1,6 +1,8 @@
 <template>
   <div class="home-page w-full h-full fixed overflow-hidden">
-    <div class="bg-shadow absolute z-100 bg-black animate-fade-out pointer-events-none w-full h-full pointer-events-none"></div>
+    <div
+      class="bg-shadow absolute z-100 bg-black animate-fade-out pointer-events-none w-full h-full pointer-events-none">
+    </div>
     <img :src="wallpaperUrl"
       :style="{ scale: inputFocus || homeStoreInstance.newShortcutPanelShow ? 1.1 : 1, filter: inputFocus || homeStoreInstance.newShortcutPanelShow ? 'blur(10px)' : 'none' }"
       class="wallpaper absolute z-0 w-full h-full object-cover transition duration-300">
@@ -11,14 +13,17 @@
         @click="handleWallpaperBtnClick">
         <svg t="1776267581958" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
           p-id="5900" width="32" height="32">
-          <path fill="#2d2d2d"
+          <path fill="#f2f2f2"
             d="M170.666667 170.666667h298.666666V85.333333H170.666667C123.52 85.333333 85.333333 123.52 85.333333 170.666667v298.666666h85.333334V170.666667z m256 384l-170.666667 213.333333h512l-128-170.666667-86.613333 115.626667L426.666667 554.666667z m298.666666-192c0-35.413333-28.586667-64-64-64s-64 28.586667-64 64 28.586667 64 64 64 64-28.586667 64-64z m128-277.333334H554.666667v85.333334h298.666666v298.666666h85.333334V170.666667c0-47.146667-38.186667-85.333333-85.333334-85.333334z m0 768H554.666667v85.333334h298.666666c47.146667 0 85.333333-38.186667 85.333334-85.333334V554.666667h-85.333334v298.666666zM170.666667 554.666667H85.333333v298.666666c0 47.146667 38.186667 85.333333 85.333334 85.333334h298.666666v-85.333334H170.666667V554.666667z"
             p-id="5901"></path>
         </svg>
       </div>
       <div class="time-container flex flex-col mt-10 select-none">
-        <div class="day-line text-center text-[1.5rem] text-white/80">{{ dateText }}</div>
-        <div class="time-line text-center font-bold text-[7rem] text-white/80">{{ timeText }}</div>
+        <div class="day-line text-center text-white/80 flex justify-center h-[36px]">
+          <span class="text-[1.5rem] leading-[0]"> {{ dateText }} </span>
+          <span class="text-[1rem] leading-[0] ml-3">{{ weekdayText }}</span>
+        </div>
+        <div class="time-line text-center font-bold text-[7rem] text-white/80 leading-[7rem]">{{ timeText }}</div>
       </div>
       <div class="search-container flex justify-center mt-10 z-5">
         <form class="searchInput-box flex relative w-[500px] h-[45px] items-center justify-between"
@@ -93,13 +98,14 @@ const isFolderSelected = ref(false)
 
 // 壁纸 URL：如果用户选择了文件夹，使用动态壁纸；否则使用默认壁纸
 const wallpaperUrl = computed(() => {
-  return isFolderSelected.value && currentWallpaperUrl.value 
-    ? currentWallpaperUrl.value 
+  return isFolderSelected.value && currentWallpaperUrl.value
+    ? currentWallpaperUrl.value
     : defaultWallpaper
 })
 
 const timeText = ref(getTimeText())
 const dateText = ref(getDateText())
+const weekdayText = ref(getWeekdayText())
 
 onMounted(async () => {
   setInterval(() => {
@@ -180,6 +186,12 @@ function getTimeText() {
   const minutes = date.getMinutes().toString().padStart(2, '0')
   const seconds = date.getSeconds().toString().padStart(2, '0')
   return `${hours}:${minutes}:${seconds}`
+}
+
+function getWeekdayText() {
+  const date = new Date()
+  const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+  return weekdays[date.getDay()]
 }
 
 function searchGo() {

@@ -33,7 +33,7 @@ interface props {
 
 function deleteShortcut() {
     homeStoreInstance.shortCuts = homeStoreInstance.shortCuts.filter(
-        (item) => item.url !== props.shortCut.url
+        (item: { name: string, url: string }) => item.url !== props.shortCut.url
     )
     localStorage.setItem("shortCuts", JSON.stringify(homeStoreInstance.shortCuts))
 }
